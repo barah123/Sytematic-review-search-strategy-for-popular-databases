@@ -11,7 +11,7 @@ eligibility criteria — expect a small, high-precision set relative to the othe
 ```mermaid
 flowchart TD
     A[Cochrane Library] --> B{Database picker}
-    B -->|Choose this one| C["Cochrane Library"\n(the combined platform)]
+    B -->|Choose this one| C["Cochrane Library platform\n(the combined one)"]
     B -->|Not this one| D["Cochrane Central Register of\nControlled Trials standalone listing\n— different interface, no Search Manager"]
     C --> E[Search → Search manager tab]
     E --> F[Build MeSH lines via the\nMeSH lookup button, not pasted text]
