@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2A4A"/>
+      <stop offset="100%" stop-color="#15406E"/>
+    </linearGradient>
+    <linearGradient id="db1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3FA9D6"/>
+      <stop offset="100%" stop-color="#2C86B0"/>
+    </linearGradient>
+    <linearGradient id="db2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5FBCDB"/>
+      <stop offset="100%" stop-color="#3FA9D6"/>
+    </linearGradient>
+    <linearGradient id="db3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#86CFE8"/>
+      <stop offset="100%" stop-color="#5FBCDB"/>
+    </linearGradient>
+    <linearGradient id="db4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#AEE0F2"/>
+      <stop offset="100%" stop-color="#86CFE8"/>
+    </linearGradient>
+    <linearGradient id="db5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D6EFF9"/>
+      <stop offset="100%" stop-color="#AEE0F2"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#06142A" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <circle cx="120" cy="120" r="116" fill="url(#bg)"/>
+  <circle cx="120" cy="120" r="116" fill="none" stroke="#4FC3E0" stroke-width="2" opacity="0.5"/>
+
+  <!-- five stacked database cylinders, fanned slightly like a hand of cards -->
+  <g filter="url(#soft)">
+    <g transform="translate(120,138) rotate(-18)">
+      <g transform="translate(-54,-16)">
+        <ellipse cx="0" cy="0" rx="20" ry="7" fill="url(#db1)"/>
+        <rect x="-20" y="0" width="40" height="22" fill="url(#db1)"/>
+        <ellipse cx="0" cy="22" rx="20" ry="7" fill="#1F6E92"/>
+      </g>
+    </g>
+    <g transform="translate(120,138) rotate(-9)">
+      <g transform="translate(-54,-16)">
+        <ellipse cx="0" cy="0" rx="20" ry="7" fill="url(#db2)"/>
+        <rect x="-20" y="0" width="40" height="22" fill="url(#db2)"/>
+        <ellipse cx="0" cy="22" rx="20" ry="7" fill="#2C86B0"/>
+      </g>
+    </g>
+    <g transform="translate(120,138) rotate(0)">
+      <g transform="translate(-54,-16)">
+        <ellipse cx="0" cy="0" rx="20" ry="7" fill="url(#db3)"/>
+        <rect x="-20" y="0" width="40" height="22" fill="url(#db3)"/>
+        <ellipse cx="0" cy="22" rx="20" ry="7" fill="#3FA9D6"/>
+      </g>
+    </g>
+    <g transform="translate(120,138) rotate(9)">
+      <g transform="translate(-54,-16)">
+        <ellipse cx="0" cy="0" rx="20" ry="7" fill="url(#db4)"/>
+        <rect x="-20" y="0" width="40" height="22" fill="url(#db4)"/>
+        <ellipse cx="0" cy="22" rx="20" ry="7" fill="#5FBCDB"/>
+      </g>
+    </g>
+    <g transform="translate(120,138) rotate(18)">
+      <g transform="translate(-54,-16)">
+        <ellipse cx="0" cy="0" rx="20" ry="7" fill="url(#db5)"/>
+        <rect x="-20" y="0" width="40" height="22" fill="url(#db5)"/>
+        <ellipse cx="0" cy="22" rx="20" ry="7" fill="#86CFE8"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- magnifying glass, search -->
+  <g filter="url(#soft)">
+    <circle cx="112" cy="94" r="34" fill="#0B1F38" opacity="0.001"/>
+    <circle cx="112" cy="94" r="30" fill="none" stroke="#F2B134" stroke-width="9"/>
+    <circle cx="112" cy="94" r="30" fill="#0F2A4A" opacity="0.15"/>
+    <line x1="134" y1="116" x2="160" y2="142" stroke="#F2B134" stroke-width="11" stroke-linecap="round"/>
+  </g>
+
+  <!-- small checkmark inside the lens, standing for a completed/verified search -->
+  <path d="M 98 95 L 108 105 L 128 83" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
