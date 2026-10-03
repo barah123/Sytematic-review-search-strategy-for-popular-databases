@@ -4,7 +4,7 @@
 doesn't require a paid subscription). **Scripted:** No public API. Fully manual.
 
 CENTRAL indexes **trial reports only**, so this search serves the interventional/RCT slice of your
-eligibility criteria — expect a small, high-precision set relative to the other four databases.
+eligibility criteria. Expect a small, high-precision set relative to the other four databases.
 
 ## Navigation
 
@@ -12,14 +12,14 @@ eligibility criteria — expect a small, high-precision set relative to the othe
 flowchart TD
     A[Cochrane Library] --> B{Database picker}
     B -->|Choose this one| C["Cochrane Library platform\n(the combined one)"]
-    B -->|Not this one| D["Cochrane Central Register of\nControlled Trials standalone listing\n— different interface, no Search Manager"]
+    B -->|Not this one| D["Cochrane Central Register of\nControlled Trials standalone listing:\ndifferent interface, no Search Manager"]
     C --> E[Search → Search manager tab]
     E --> F[Build MeSH lines via the\nMeSH lookup button, not pasted text]
     F --> G[Add free-text lines\nfor each concept]
     G --> H[Combine lines by number:\n#6 AND #10 AND #11]
     H --> I[View results]
     I --> J[Apply Year first published\ncustom range filter]
-    J --> K[Switch to the Trials tab\n— not Cochrane Reviews]
+    J --> K["Switch to the Trials tab\n(not Cochrane Reviews)"]
     K --> L[Select all → Export →\nRIS EndNote format]
 ```
 
@@ -27,16 +27,16 @@ flowchart TD
 "Cochrane Central Register of Controlled Trials (CENTRAL)" listing. The standalone listing routes
 through a different (EBSCO/Elsevier-contributed) interface that doesn't support the `#1, #2, ...`
 Search Manager syntax below at all. The Cochrane Library platform is also what lets you see Cochrane
-Reviews, CENTRAL/Trials, Editorials, and Clinical Answers as separate tabs from one search — only the
+Reviews, CENTRAL/Trials, Editorials, and Clinical Answers as separate tabs from one search; only the
 **Trials** tab is CENTRAL.
 
 ## Query syntax: numbered search lines, not one boolean string
 
 Cochrane's Search Manager builds `#1`, `#2`, `#3`... as you run each line, then lets you combine them
 by number (`#6 AND #10 AND #11`). This is actually the **safest** query-building approach of all five
-databases — since each combine step references an already-computed result set rather than raw boolean
-text, there's no operator-precedence risk (unlike CINAHL's row-grouping situation, or a hand-typed
-boolean string with missing parentheses).
+databases, since each combine step references an already-computed result set rather than raw boolean
+text. There's no operator-precedence risk here, unlike CINAHL's row-grouping situation or a hand-typed
+boolean string with missing parentheses.
 
 ```
 #1  MeSH descriptor: [Breast Feeding] explode all trees
@@ -61,30 +61,30 @@ boolean string with missing parentheses).
 
 ### Don't paste `MeSH descriptor: [...]` lines directly
 
-Pasting that exact text into the query box can trip a "special characters not supported" parse error —
-this is a copy-paste artifact (invisible formatting carried over from a rendered code block), not an
+Pasting that exact text into the query box can trip a "special characters not supported" parse error.
+This is a copy-paste artifact (invisible formatting carried over from a rendered code block), not an
 actual syntax problem with the query. **Use the line's own MeSH lookup button instead**: search the
 term, check "explode all trees," and add it to the search manager from there. If the thesaurus doesn't
-have an exact-name match for a term (e.g. it might offer "Metagenome" instead of "Metagenomics"), that's
-a low-stakes substitution as long as your free-text line already covers the same root term with a
-wildcard (`metagenom*` catches both).
+have an exact-name match for a term (it might offer "Metagenome" instead of "Metagenomics," for
+instance), that's a low-stakes substitution as long as your free-text line already covers the same
+root term with a wildcard (`metagenom*` catches both).
 
 ## Filters: date yes, language no
 
-- **Publication Date** — apply your review's range, using the left filter panel's **"Year first
-  published"** facet with a custom range (not the separate "Date added to CENTRAL trials database"
-  facet, which tracks indexing recency, not publication year — easy to confuse, they sit right next to
-  each other).
+- **Publication Date.** Apply your review's range, using the left filter panel's **"Year first
+  published"** facet with a custom range. Don't use the separate "Date added to CENTRAL trials
+  database" facet, which tracks indexing recency rather than publication year; the two sit right next
+  to each other and are easy to confuse.
 - **Do not apply a language filter.** CENTRAL's records are sparsely language-tagged, and the filter
-  removes eligible English trials along with the non-English ones — a false-negative problem, not a
-  precision gain. Apply the English-language criterion during title/abstract screening instead, where
-  you can actually read the record to confirm.
+  removes eligible English trials along with the non-English ones. That's a false-negative problem,
+  not a precision gain. Apply the English-language criterion during title/abstract screening instead,
+  where you can actually read the record to confirm.
 
 ## Export
 
-Switch to the **Trials** tab (not Cochrane Reviews — that tab holds systematic reviews, a different
-publication type entirely) before exporting. Select all → **Export selected citations** → **RIS
-(EndNote)** format.
+Switch to the **Trials** tab before exporting, not Cochrane Reviews (that tab holds systematic
+reviews, a different publication type entirely). Select all, then **Export selected citations**, then
+choose **RIS (EndNote)** format.
 
 ### Two export quirks
 
@@ -98,14 +98,15 @@ publication type entirely) before exporting. Select all → **Export selected ci
    ...
    ```
    Any RIS parser you write needs to skip lines starting with `Record #`, `Provider:`, or `Content:`
-   before hitting the actual `TY` tag — they're not part of the RIS spec, but Cochrane includes them
+   before hitting the actual `TY` tag. They're not part of the RIS spec, but Cochrane includes them
    anyway.
 2. **The save dialog may append a duplicate extension.** The downloaded file can end up named
-   `central_search.ris .ris` (note the space before the second `.ris`). Check the actual saved filename
-   and rename if needed before importing it anywhere that expects a clean `.ris` extension.
+   `central_search.ris .ris` (note the space before the second `.ris`). Check the actual saved
+   filename and rename it if needed before importing it anywhere that expects a clean `.ris`
+   extension.
 
 ## Worked example (from the source review)
 
-- Raw `#12` result: 693 (6 Cochrane Reviews + 687 Trials).
-- After the Year 2010–2026 custom range filter, Trials tab: **611**.
-- Deduplicated against already-screened PubMed + Scopus + WoS + CINAHL: 320 genuinely new records.
+- Raw `#12` result: 693 (6 Cochrane Reviews, 687 Trials).
+- After the Year 2010-2026 custom range filter, Trials tab: **611**.
+- Deduplicated against already-screened PubMed, Scopus, WoS, and CINAHL: 320 genuinely new records.

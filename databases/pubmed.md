@@ -1,6 +1,6 @@
 # PubMed / MEDLINE
 
-**Access:** Free, public. **Scripted:** Yes, via NCBI's E-utilities — no API key required for
+**Access:** Free, public. **Scripted:** Yes, via NCBI's E-utilities. No API key is required for
 light use (stay under ~3 requests/second; register for a free API key if you need more).
 
 ## Why this one is different from the rest
@@ -8,7 +8,7 @@ light use (stay under ~3 requests/second; register for a free API key if you nee
 PubMed is the only database in this set with a documented, stable, keyless public API. Every other
 database here either requires paid institutional API credentials you probably don't have (Scopus, Web
 of Science) or has no API at all (CINAHL, CENTRAL). That makes PubMed the one search you can fully
-script and re-run identically forever — treat it as your baseline, and expect the other four to cost
+script and re-run identically forever. Treat it as your baseline, and expect the other four to cost
 real manual time per execution.
 
 ## The three E-utilities endpoints you need
@@ -33,13 +33,13 @@ flowchart LR
 
 PubMed search fields, the ones you'll actually use:
 
-- `[tiab]` — title or abstract
-- `[mesh]` — Medical Subject Heading (use sparingly combined with free text; MeSH indexing lags
+- `[tiab]`: title or abstract
+- `[mesh]`: Medical Subject Heading (use sparingly combined with free text; MeSH indexing lags
   publication by months, so a MeSH-only query misses recent papers)
-- `[pt]` — publication type (e.g. `Review[pt]` to find, or `NOT Review[pt]` to exclude)
-- `[dp]` — date of publication, as `"2010/01/01"[dp] : "2026/12/31"[dp]`
+- `[pt]`: publication type (e.g. `Review[pt]` to find, or `NOT Review[pt]` to exclude)
+- `[dp]`: date of publication, as `"2010/01/01"[dp] : "2026/12/31"[dp]`
 
-Boolean operators `AND`, `OR`, `NOT` — must be capitalized. Wrap each concept group in its own
+Boolean operators `AND`, `OR`, `NOT` must be capitalized. Wrap each concept group in its own
 parentheses, then combine:
 
 ```
@@ -74,8 +74,8 @@ curl -G "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi" \
   > pubmed_export.txt
 ```
 
-**Rate limit:** sleep ~0.35s between calls without an API key (3/sec limit); with a free registered
-key, sleep ~0.1s (10/sec limit).
+**Rate limit:** sleep ~0.35s between calls without an API key (3/sec limit). With a free registered
+key, sleep ~0.1s (10/sec limit) instead.
 
 ## Parsing the raw export
 
@@ -92,12 +92,12 @@ LID - 10.1234/example.doi [doi]
 AID - 10.1234/example.doi [doi]
 ```
 
-- `PMID-` starts each record — split the file on `\nPMID- ` to separate records.
-- `TI`, `AB` — title, abstract. Normalize continuation-line wrapping with a regex like
+- `PMID-` starts each record. Split the file on `\nPMID- ` to separate records.
+- `TI`, `AB`: title, abstract. Normalize continuation-line wrapping with a regex like
   `re.sub(r'\n\s{6}', ' ', field_text)` before trusting the text as one string.
-- `PT` — publication type, repeats once per tag (a paper can carry both `Journal Article` and
+- `PT`: publication type, repeats once per tag (a paper can carry both `Journal Article` and
   `Randomized Controlled Trial`). Collect all occurrences, don't just take the first.
-- `LID` / `AID` with a trailing `[doi]` marker — the DOI. Not every record has one.
+- `LID` / `AID` with a trailing `[doi]` marker: the DOI. Not every record has one.
 
 ## A known gotcha worth building in from day one: the pooled-reanalysis arm
 
@@ -111,13 +111,13 @@ AND (reanalys* OR "re-analysis" OR "pooled analysis" OR "publicly available"
      OR "individual participant" OR "cross-cohort")
 ```
 
-This catches integrative meta-analyses that reanalyze public sequence data — these get indexed as
+This catches integrative meta-analyses that reanalyze public sequence data. These get indexed as
 original research, not as systematic reviews, so a standard `NOT Review[pt]` filter on your main search
-won't exclude them, and they'll silently slip into your main corpus unless you deliberately search for
-them and divert them to a separately-tracked set.
+won't exclude them. They'll silently slip into your main corpus unless you deliberately search for them
+and divert them to a separately-tracked set.
 
 ## Worked example (from the source review)
 
 - **Primary corpus query:** executed 2026-10-01, **2,109 results**.
-- **Pooled-reanalysis arm:** executed same day, **40 results**, of which 24 overlapped the primary
-  corpus (same papers matched both searches) and 16 were genuinely separate.
+- **Pooled-reanalysis arm:** executed the same day, **40 results**. 24 overlapped the primary corpus
+  (same papers matched both searches), and 16 were genuinely separate.
