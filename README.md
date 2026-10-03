@@ -1,13 +1,9 @@
-<p align="center">
-  <img src="assets/logo.svg" width="160" alt="Systematic Review Search Strategy logo" />
-</p>
+![Systematic Review Search Strategy logo](assets/logo.svg)
 
-<h1 align="center">Systematic Review Search Strategy for Popular Databases</h1>
+# Systematic Review Search Strategy for Popular Databases
 
-<p align="center">
-  A practical, step-by-step reference for running a reproducible, PRISMA-S-compliant literature search<br/>
-  across five major databases — PubMed, Scopus, Web of Science, CINAHL, and Cochrane CENTRAL.
-</p>
+A practical, step-by-step reference for running a reproducible, PRISMA-S-compliant literature search
+across five major databases — PubMed, Scopus, Web of Science, CINAHL, and Cochrane CENTRAL.
 
 ---
 
