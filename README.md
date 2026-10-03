@@ -107,3 +107,4 @@ why they're called out here instead of buried in one guide:
 
 Public domain / CC0 — reuse, adapt, and redistribute freely. No attribution required, though a link
 back is always appreciated.
+Philip Y. Appiah |pyappiah561@gmail.com
